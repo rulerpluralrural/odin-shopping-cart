@@ -11,9 +11,9 @@ export default function Nav() {
 			<div className="flex justify-around p-5 font-serif font-bold bg-slate-900 text-zinc-100 w-full shadow-sm shadow-black">
 				<div className="flex justify-center items-center gap-2 cursor-pointer hover:scale-105 transition-transform text-xl text-zinc-100 px-3 py-1rounded-md">
 					<img
-						src="./public/frogmouth-helm.png"
+						src="./frogmouth-helm.png"
 						alt="logo"
-						className="w-12 aspect-square rounded-full"
+						className="w-14 aspect-square rounded-full"
 					/>
 					<p>Fake Shop</p>
 				</div>

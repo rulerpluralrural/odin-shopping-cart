@@ -3,7 +3,7 @@ import React from "react";
 
 export default function Footer() {
 	return (
-		<div className="flex flex-col text-center">
+		<div className="flex flex-col text-center bg-slate-950 text-zinc-200 w-full py-2 mt-5">
 			<div>
 				<h1>Want to recieve game updates and recommendations? <button>Sign In</button></h1>
 				<h1>Do not have an account yet? <button>Sign Up</button></h1>

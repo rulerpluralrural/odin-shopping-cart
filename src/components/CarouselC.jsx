@@ -23,14 +23,16 @@ const responsive = {
 	},
 };
 
-export default function CarouselB() {
+export default function CarouselC() {
 	const [data, setData] = useState(null);
 	const [error, setError] = useState(null);
 
 	useEffect(() => {
 		const key = "cf6ae2de0b734d70b5489940e0af6b6c";
 		axios
-			.get(`https://api.rawg.io/api/genres?key=${key}`)
+			.get(
+				`https://api.rawg.io/api/games?dates=2001-01-01,2001-12-31&ordering=-rating&key=${key}`
+			)
 			.then((response) => setData(response.data))
 			.catch((error) => setError(error));
 	}, []);
@@ -41,6 +43,7 @@ export default function CarouselB() {
 				<p>{error.message}</p>
 			</div>
 		);
+
 	if (!data)
 		return (
 			<div className="w-[500px] aspect-square text-center">
@@ -51,7 +54,7 @@ export default function CarouselB() {
 	return (
 		<>
 			<div className="flex flex-col justify-center items-center text-center w-full mt-5">
-				<h1 className="text-center font-mono font-bold">Browse by Category</h1>
+				<h1 className="text-center font-mono font-bold">Highest Rated Games</h1>
 				<Carousel
 					responsive={responsive}
 					infinite={true}
@@ -62,13 +65,20 @@ export default function CarouselB() {
 				>
 					{data.results.map((item, index) => {
 						return (
-							<div key={index} className="w-[95%] cursor-pointer shadow-lg shadow-slate-900 hover:animate-pulse">
+							<div
+								key={index}
+								className="w-[95%] cursor-pointer shadow-lg shadow-slate-900 hover:animate-pulse"
+							>
 								<img
-									src={item.image_background}
+									src={item.background_image}
 									alt={`${item.name} img`}
 									className="w-full aspect-square object-cover"
 								/>
-								<p className="bg-gradient-to-b from-gray-900 to-gray-600 text-sm font-bold p-1">{item.name}</p>
+								<p className="bg-gradient-to-b from-gray-900 to-gray-600 p-1 text-sm">
+									{item.name.length >= 20
+										? item.name.substring(0, 20) + "..."
+										: item.name}
+								</p>
 							</div>
 						);
 					})}
