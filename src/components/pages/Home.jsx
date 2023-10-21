@@ -1,9 +1,7 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-export default function Hero() {
-	
-
+export default function Home() {
 	return (
 		<>
 			<div className="w-[550px] h-[380px] flex flex-col items-start self-start ml-20 font-Roboto bg-black bg-opacity-20 rounded-md p-2">
