@@ -11,10 +11,14 @@ import { Link } from "react-router-dom";
 const navHover =
 	"relative block after:block after:content-[''] after:absolute after:h-[1.8px] after:bg-zinc-200 after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-center cursor-pointer";
 
-export default function Navbar() {
+export default function Navbar({ setRoute, route }) {
 	return (
 		<>
-			<div className="flex flex-col justify-between items-center ">
+			<div
+				className={`flex flex-col justify-between items-center ${
+					route === "shop" && "fixed bg-zinc-900 shadow-[1px_1px_10px] shadow-yellow-500 z-20"
+				} w-full bg-transparentz-20`}
+			>
 				<div className="flex justify-between py-5 px-10 font-Roboto font-bold text-zinc-100 w-full">
 					<h1
 						style={{
@@ -32,13 +36,34 @@ export default function Navbar() {
 								<FontAwesomeIcon icon={faBars} className="hidden" />
 							</li>
 							<li className={navHover}>
-								<Link to={"/"}>HOME</Link>
+								<Link
+									to={"/"}
+									onClick={() => {
+										setRoute("home");
+									}}
+								>
+									HOME
+								</Link>
 							</li>
 							<li className={navHover}>
-								<Link to={"/shop"}>SHOP</Link>
+								<Link
+									to={"/shop"}
+									onClick={() => {
+										setRoute("shop");
+									}}
+								>
+									SHOP
+								</Link>
 							</li>
 							<li className={navHover}>
-								<Link to={"/contact"}>CONTACT</Link>
+								<Link
+									to={"/contact"}
+									onClick={() => {
+										setRoute("contact");
+									}}
+								>
+									CONTACT
+								</Link>
 							</li>
 							<li>
 								<FontAwesomeIcon
