@@ -3,8 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Triangle } from "react-loader-spinner";
 import { Link } from "react-router-dom";
 
-export default function Home({ setRoute }) {
-	const [loading, setLoading] = useState(true);
+export default function Home({ loading, setLoading, setRoute, route }) {
 	useEffect(() => {
 		const load = setInterval(() => {
 			setLoading(false);
@@ -23,9 +22,9 @@ export default function Home({ setRoute }) {
 		);
 
 	return (
-		<>
+		<div className="flex items-center flex-grow">
 			<div
-				className="w-[550px] h-[380px] flex flex-col items-start self-start ml-20 font-Roboto bg-black bg-opacity-20 rounded-md p-2
+				className="w-[550px] h-[380px] flex flex-col items-start ml-20 font-Roboto bg-black bg-opacity-20 rounded-md p-2
 				"
 			>
 				<h1 className="text-center font-bold text-[2.9rem] text-green-200">
@@ -39,6 +38,7 @@ export default function Home({ setRoute }) {
 				<Link
 					to={"shop"}
 					onClick={() => {
+						setLoading(true);
 						setRoute("shop");
 					}}
 					className="mt-2 bg-red-600 hover:bg-red-700 focus:bg-red-700 transition-colors duration-200 ease-in py-2 font-bold text-2xl rounded-lg w-full text-center"
@@ -46,6 +46,6 @@ export default function Home({ setRoute }) {
 					Shop Now!
 				</Link>
 			</div>
-		</>
+		</div>
 	);
 }

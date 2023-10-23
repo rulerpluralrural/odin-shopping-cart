@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 const navHover =
 	"relative block after:block after:content-[''] after:absolute after:h-[1.8px] after:bg-zinc-200 after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-center cursor-pointer";
 
-export default function Navbar({ setRoute, route }) {
+export default function Navbar({ setRoute, route, setLoading }) {
 	return (
 		<>
 			<div
@@ -21,7 +21,11 @@ export default function Navbar({ setRoute, route }) {
 				} w-full bg-transparentz-20`}
 			>
 				<div className="flex justify-between py-5 px-10 font-Roboto font-bold text-zinc-100 w-full">
-					<h1
+					<Link to={"/"}
+					onClick={()=> {
+						if (route !== "home") setLoading(true)
+						setRoute("home")
+					}}
 						style={{
 							textShadow:
 								"0 0 5px #ffa500, 0 0 10px #ffa500, 0 0 15px #ffa500, 0 0 20px #ffa500, 0 0 40px #ff0000, 0 0 10px #ff8d00, 0 0 80px #ff0000",
@@ -30,15 +34,15 @@ export default function Navbar({ setRoute, route }) {
 						className="text-2xl cursor-pointer animate-blink"
 					>
 						Fake Shop
-					</h1>
-					<Nav setRoute={setRoute} />
+					</Link>
+					<Nav setRoute={setRoute} setLoading={setLoading} route={route} />
 				</div>
 			</div>
 		</>
 	);
 }
 
-function Nav({ setRoute }) {
+function Nav({ setRoute, setLoading, route }) {
 	return (
 		<nav>
 			<ul className="flex items-center gap-7 text-[1.3rem] tracking-tighter text-zinc-100">
@@ -49,6 +53,7 @@ function Nav({ setRoute }) {
 					<Link
 						to={"/"}
 						onClick={() => {
+							if (route !== "home") setLoading(true);
 							setRoute("home");
 						}}
 					>
@@ -59,20 +64,11 @@ function Nav({ setRoute }) {
 					<Link
 						to={"/shop"}
 						onClick={() => {
+							if (route !== "shop") setLoading(true);
 							setRoute("shop");
 						}}
 					>
 						SHOP
-					</Link>
-				</li>
-				<li className={navHover}>
-					<Link
-						to={"/contact"}
-						onClick={() => {
-							setRoute("contact");
-						}}
-					>
-						CONTACT
 					</Link>
 				</li>
 				<li>

@@ -6,7 +6,7 @@ const buttonStyle =
 	
 export default function Footer() {
 	return (
-		<div className="flex flex-col items center gap-2 font-bold font-Roboto text-center text-zinc-200 w-full py-2 text-lg">
+		<div className="flex flex-col items-center gap-2 font-bold font-Roboto text-center bg-inherit text-zinc-200 w-full py-2 text-lg">
 			<h1>
 				Want to recieve game updates and recommendations?{" "}
 				<button className={buttonStyle}>SIGN IN</button>

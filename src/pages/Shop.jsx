@@ -9,9 +9,8 @@ import Select from "../components/Select";
 const key = "cf6ae2de0b734d70b5489940e0af6b6c";
 const URL = `https://api.rawg.io/api/games?key=${key}&dates=2019-09-01,2019-09-30&platforms=18,1,7`;
 
-export default function Shop({ error, setError }) {
+export default function Shop({ loading, setLoading, error, setError }) {
 	const [data, setData] = useState(null);
-	const [loading, setLoading] = useState(true);
 	const [sortType, setSortType] = useState("default");
 	const [searchInput, setSearchInput] = useState("");
 	const [filteredResults, setFilteredResults] = useState([]);
@@ -34,7 +33,7 @@ export default function Shop({ error, setError }) {
 
 	// Handle sorting data's based on selected option and search input
 	const sortedData = useMemo(() => {
-		let results = searchInput.length >= 1 ? filteredResults : data?.results
+		let results = searchInput.length >= 1 ? filteredResults : data?.results;
 
 		if (sortType === "a-z") {
 			results = results.sort((a, b) => {
@@ -61,44 +60,44 @@ export default function Shop({ error, setError }) {
 		axios
 			.get(URL)
 			.then((response) => {
+				setData({
+					...response.data,
+					results: response.data.results.map((item) => {
+						return {
+							...item,
+							prices: prices[Math.floor(Math.random() * prices.length)],
+						};
+					}),
+				});
 				setLoading(false);
-				setData({...response.data, results: response.data.results.map((item) => {
-					return {...item, prices: prices[Math.floor(Math.random() * prices.length)]}
-				})});
 			})
 			.catch((error) => {
 				setLoading(false);
 				setError(error);
 			});
-	}, [prices]);
+	}, []);
 
 	if (error) {
-		return <Error />;
+		return <Error error={error} />;
 	} else if (loading) {
 		return <Loading />;
 	} else {
 		return (
 			<div className="flex flex-col gap-6 self-center mt-28 overflow-scroll scroll-smooth px-8">
 				<div className="flex gap-2 items-center justify-center self-center w-full">
-					<SearchBox
-						searchItems={searchItems}
-					/>
+					<SearchBox searchItems={searchItems} />
 					<Select setSortType={setSortType} />
 				</div>
-				<ShopGrid results={sortedData.results}/>
+				<ShopGrid results={sortedData.results} />
 			</div>
 		);
 	}
 }
 
-function Error() {
+function Error(error) {
 	return (
 		<div className="flex justify-center items-center font-Poppins font-bold text-xl bg-white min-h-screen">
-			<img
-				src="./images/error.jpg"
-				alt="error-img"
-				className="w-[500px] aspect-square"
-			/>
+			<p>{error.message}</p>
 		</div>
 	);
 }
