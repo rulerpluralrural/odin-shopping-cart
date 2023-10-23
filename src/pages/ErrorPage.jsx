@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Triangle } from "react-loader-spinner";
 
-export default function ErrorPage({ loading, setRoute, route, setLoading }) {
+export default function ErrorPage({ loading, setRoute, setLoading }) {
 	useEffect(() => {
 		const load = setInterval(() => {
 			setLoading(false);
