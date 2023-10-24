@@ -9,7 +9,7 @@ import Select from "../components/Select";
 const key = "cf6ae2de0b734d70b5489940e0af6b6c";
 const URL = `https://api.rawg.io/api/games?key=${key}&dates=2020-01-01,2023-10-20`;
 
-export default function Shop({ loading, setLoading, error, setError }) {
+export default function Shop({ loading, setLoading, error, setError, setCartItems, cartItems }) {
 	const [data, setData] = useState(null);
 	const [sortType, setSortType] = useState("default");
 	const [searchInput, setSearchInput] = useState("");
@@ -96,7 +96,7 @@ export default function Shop({ loading, setLoading, error, setError }) {
 					<SearchBox searchItems={searchItems} />
 					<Select setSortType={setSortType} />
 				</div>
-				<ShopGrid results={sortedData.results} />
+				<ShopGrid results={sortedData.results} setCartItems={setCartItems} cartItems={cartItems}/>
 			</div>
 		);
 	}
