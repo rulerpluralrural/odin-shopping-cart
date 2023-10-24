@@ -7,7 +7,7 @@ import SearchBox from "../components/SearchBox";
 import Select from "../components/Select";
 
 const key = "cf6ae2de0b734d70b5489940e0af6b6c";
-const URL = `https://api.rawg.io/api/games?key=${key}&dates=2019-09-01,2019-09-30&platforms=18,1,7`;
+const URL = `https://api.rawg.io/api/games?key=${key}&dates=2020-01-01,2023-10-20`;
 
 export default function Shop({ loading, setLoading, error, setError }) {
 	const [data, setData] = useState(null);
@@ -50,6 +50,14 @@ export default function Shop({ loading, setLoading, error, setError }) {
 		} else if (sortType === "popularity") {
 			results = results.sort((a, b) => {
 				return b.suggestions_count - a.suggestions_count;
+			});
+		} else if (sortType === "highest") {
+			results = results.sort((a, b) => {
+				return b.prices - a.prices;
+			});
+		} else if (sortType === "lowest") {
+			results = results.sort((a, b) => {
+				return a.prices - b.prices;
 			});
 		}
 

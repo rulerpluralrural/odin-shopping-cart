@@ -18,6 +18,8 @@ export default function Select({ setSortType }) {
 				<option value="z-a">Z - A</option>
 				<option value="rating">Rating</option>
 				<option value="popularity">Popularity</option>
+				<option value="highest">Highest(price)</option>
+				<option value="lowest">Lowest(price)</option>
 			</select>
 		</div>
 	);

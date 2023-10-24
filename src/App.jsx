@@ -24,7 +24,6 @@ export default function App() {
 	}, [window]);
 
 	return (
-		<>
 			<div
 				className={`flex flex-col h-screen justify-between ${
 					route === "home" ? "bg-[url('/images/cod.jpeg')]" : "bg-zinc-900 "
@@ -44,6 +43,5 @@ export default function App() {
 				</BrowserRouter>
 				<Cart toggleCart={toggleCart} setToggleCart={setToggleCart}/>
 			</div>
-		</>
 	);
 }
