@@ -53,15 +53,16 @@ function CardHeader({ item }) {
 function CardDetails({ item, setCartItems, cartItems }) {
 	const [activeButton, setActiveButton] = useState(false)
 
-	useEffect(() => {
-		const toggle = setInterval(() => {
-			setActiveButton(false)
-		}, 1000)
+	// useEffect(() => {
+	// 	const toggle = setInterval(() => {
+	// 		setActiveButton(false)
+	// 	}, 1000)
 
-		return () => {
-			clearInterval(toggle)
-		}
-	},[activeButton])
+	// 	return () => {
+	// 		clearInterval(toggle)
+	// 	}
+	// },[activeButton])
+
 	return (
 		<div className="py-5 px-3 text-left relative flex justify-between w-full">
 			<div>
@@ -85,6 +86,9 @@ function CardDetails({ item, setCartItems, cartItems }) {
 				<FontAwesomeIcon
 					icon={faCartPlus}
 					className={`text-green-400 group-hover:text-red-400 transition-colors ${activeButton && 'animate-ping'}`}
+					onAnimationEnd={() => {
+						setActiveButton(false)
+					}}
 				/>
 			</button>
 		</div>

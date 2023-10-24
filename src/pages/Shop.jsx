@@ -74,6 +74,7 @@ export default function Shop({ loading, setLoading, error, setError, setCartItem
 						return {
 							...item,
 							prices: prices[Math.floor(Math.random() * prices.length)],
+							purchaseCount: 0
 						};
 					}),
 				});

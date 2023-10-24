@@ -19,9 +19,14 @@ export default {
 						color: "#fff6a9",
 					},
 				},
+				ping: {
+					"75%, 100%": { transform: "scale(2)", opacity: "0" },
+				},
 			},
+
 			animation: {
 				blink: "blink 10s ease infinite",
+				ping: "ping 1s linear forwards"
 			},
 		},
 	},

@@ -3,7 +3,6 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
 	faCircleXmark,
-	faTrashCan,
 	faPlus,
 	faMinus,
 } from "@fortawesome/free-solid-svg-icons";
@@ -64,39 +63,16 @@ function CartBody({ cartItems, setCartItems }) {
 						key={index}
 						className="flex gap-2 justify-between relative border-[2px] border-slate-800 rounded-md"
 					>
-						<div>
-							<img
-								src={item.background_image}
-								alt={`${item.name} img`}
-								className="w-[300px] h-[150px] object-cover rounded-md"
-							/>
-						</div>
-						<div className="text-left w-full flex flex-col justify-evenly text-lg p-2 pb-0">
-							<div>
-								<p className="text-yellow-300 font-bold text-xl">{item.name}</p>
-								<p>${item.prices}</p>
-							</div>
-
-							<div className="flex justify-between items-center gap-2">
-								<p className="text-green-400 font-bold">
-									Total Price: <span className=" font-medium">$0.00</span>
-								</p>
-								<div className="flex items-center justify-center gap-2 text-xl">
-									<FontAwesomeIcon
-										icon={faPlus}
-										className="cursor-pointer text-green-500 hover:text-green-600 transition-colors"
-									/>
-									<p className="font-bold">0</p>
-									<FontAwesomeIcon
-										icon={faMinus}
-										className="cursor-pointer text-red-400 hover:text-red-500"
-									/>
-								</div>
-							</div>
-						</div>
+						<CardImage item={item} />
+						<CardDetails item={item} cartItems={cartItems} setCartItems={setCartItems} index={index} />
 						<FontAwesomeIcon
-							icon={faTrashCan}
+							icon={faCircleXmark}
 							className="absolute top-2 right-2 text-red-500 hover:text-red-600 cursor-pointer text-lg"
+							onClick={() => {
+								setCartItems(
+									cartItems.slice(0, index).concat(cartItems.slice(index + 1))
+								);
+							}}
 						/>
 					</div>
 				);
@@ -117,3 +93,52 @@ function CartFooter() {
 		</div>
 	);
 }
+
+function CardImage({ item }) {
+	return (
+		<div>
+			<img
+				src={item.background_image}
+				alt={`${item.name} img`}
+				className="w-[300px] h-[150px] object-cover rounded-md"
+			/>
+		</div>
+	);
+}
+
+function CardDetails({ item, cartItems, setCartItems, index }) {
+	return (
+		<div className="text-left w-full flex flex-col justify-evenly text-lg p-2 pb-0">
+			<div>
+				<p className="text-yellow-300 font-bold text-xl">{item.name}</p>
+				<p>${item.prices}</p>
+			</div>
+			<div className="flex justify-between items-center gap-2">
+				<p className="text-green-400 font-bold">
+					Total Price: <span className=" font-medium">$0.00</span>
+				</p>
+				<div className="flex items-center justify-center gap-2 text-xl">
+					<FontAwesomeIcon
+						icon={faPlus}
+						className="cursor-pointer text-slate-400 hover:text-green-600 transition-colors"
+						onClick={() => {
+							item.purchaseCount += 1
+							setCartItems([...cartItems])
+						}}
+					/>
+					<p className="font-bold">{item.purchaseCount}</p>
+					<FontAwesomeIcon
+						icon={faMinus}
+						className="cursor-pointer text-slate-400 hover:text-red-500"
+						onClick={() => {
+							if (item.purchaseCount <= 1) return
+							item.purchaseCount -= 1
+							setCartItems([...cartItems])
+						}}
+					/>
+				</div>
+			</div>
+		</div>
+	);
+}
+
