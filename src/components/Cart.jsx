@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import React from "react";
+import React, { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
 	faCircleXmark,
@@ -21,10 +21,10 @@ export default function Cart({
 					: "opacity-100 pointer-events-auto"
 			}`}
 		>
-			<div className="flex flex-col justify-between text-zinc-200 bg-slate-900 h-full rounded-sm overflow-hidden">
+			<div className="flex flex-col justify-between text-zinc-200 bg-slate-900 h-full w-[550px] rounded-sm overflow-hidden">
 				<CartHeader setToggleCart={setToggleCart} cartItems={cartItems} />
 				<CartBody cartItems={cartItems} setCartItems={setCartItems} />
-				<CartFooter />
+				<CartFooter cartItems={cartItems} />
 			</div>
 		</div>
 	);
@@ -32,14 +32,14 @@ export default function Cart({
 
 function CartHeader({ setToggleCart, cartItems }) {
 	return (
-		<div className="relative border-yellow-300 border-b-[1px]">
+		<div className="relative border-slate-500 border-b-[1px]">
 			<div className=" p-5 text-center py-8 pb-3 font-Poppins">
 				<div className="bg-slate-800 rounded-sm text-xl font-bold p-3">
 					<h1>Your Cart</h1>
 					<p>
 						Your cart have{" "}
 						<span className="text-green-400 font-bold">{cartItems.length}</span>{" "}
-						<span>{cartItems.length === 0 ? "item" : "items"}</span>
+						<span>{cartItems.length <= 1 ? "item" : "items"}</span>
 					</p>
 				</div>
 			</div>
@@ -64,7 +64,11 @@ function CartBody({ cartItems, setCartItems }) {
 						className="flex gap-2 justify-between relative border-[2px] border-slate-800 rounded-md"
 					>
 						<CardImage item={item} />
-						<CardDetails item={item} cartItems={cartItems} setCartItems={setCartItems} index={index} />
+						<CardDetails
+							item={item}
+							cartItems={cartItems}
+							setCartItems={setCartItems}
+						/>
 						<FontAwesomeIcon
 							icon={faCircleXmark}
 							className="absolute top-2 right-2 text-red-500 hover:text-red-600 cursor-pointer text-lg"
@@ -81,11 +85,14 @@ function CartBody({ cartItems, setCartItems }) {
 	);
 }
 
-function CartFooter() {
+function CartFooter({ cartItems }) {
+
 	return (
-		<div className="p-5 border-t-[1px] border-yellow-400 text-center font-Roboto">
+		<div className="p-5 border-t-[1px] border-slate-500 text-center font-Roboto">
 			<p className="font-bold text-lg">
-				Total Amount : <span className="text-green-400">$0.00</span>
+				Total Amount : <span className="text-green-400">${cartItems.reduce((accu, item) => {
+					return accu + item.prices * item.purchaseCount
+				}, 0).toFixed(2)}</span>
 			</p>
 			<button className="bg-blue-600 hover:bg-blue-700 focus:hover-blue-700 font-bold tracking-wider text-lg px-3 py-1 rounded-md w-full mt-2">
 				Check Out
@@ -100,13 +107,16 @@ function CardImage({ item }) {
 			<img
 				src={item.background_image}
 				alt={`${item.name} img`}
-				className="w-[300px] h-[150px] object-cover rounded-md"
+				className="w-[250px] h-[150px] object-cover rounded-md"
 			/>
 		</div>
 	);
 }
 
-function CardDetails({ item, cartItems, setCartItems, index }) {
+function CardDetails({ item, cartItems, setCartItems }) {
+
+	const num = item.prices * item.purchaseCount;
+
 	return (
 		<div className="text-left w-full flex flex-col justify-evenly text-lg p-2 pb-0">
 			<div>
@@ -115,15 +125,16 @@ function CardDetails({ item, cartItems, setCartItems, index }) {
 			</div>
 			<div className="flex justify-between items-center gap-2">
 				<p className="text-green-400 font-bold">
-					Total Price: <span className=" font-medium">$0.00</span>
+					Total Price: <span className=" font-medium">${num.toFixed(2)}</span>
 				</p>
 				<div className="flex items-center justify-center gap-2 text-xl">
 					<FontAwesomeIcon
 						icon={faPlus}
 						className="cursor-pointer text-slate-400 hover:text-green-600 transition-colors"
 						onClick={() => {
-							item.purchaseCount += 1
-							setCartItems([...cartItems])
+							if (item.purchaseCount >= 69) return;
+							item.purchaseCount += 1;
+							setCartItems([...cartItems]);
 						}}
 					/>
 					<p className="font-bold">{item.purchaseCount}</p>
@@ -131,9 +142,9 @@ function CardDetails({ item, cartItems, setCartItems, index }) {
 						icon={faMinus}
 						className="cursor-pointer text-slate-400 hover:text-red-500"
 						onClick={() => {
-							if (item.purchaseCount <= 1) return
-							item.purchaseCount -= 1
-							setCartItems([...cartItems])
+							if (item.purchaseCount <= 1) return;
+							item.purchaseCount -= 1;
+							setCartItems([...cartItems]);
 						}}
 					/>
 				</div>
@@ -141,4 +152,3 @@ function CardDetails({ item, cartItems, setCartItems, index }) {
 		</div>
 	);
 }
-

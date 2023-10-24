@@ -53,16 +53,6 @@ function CardHeader({ item }) {
 function CardDetails({ item, setCartItems, cartItems }) {
 	const [activeButton, setActiveButton] = useState(false)
 
-	// useEffect(() => {
-	// 	const toggle = setInterval(() => {
-	// 		setActiveButton(false)
-	// 	}, 1000)
-
-	// 	return () => {
-	// 		clearInterval(toggle)
-	// 	}
-	// },[activeButton])
-
 	return (
 		<div className="py-5 px-3 text-left relative flex justify-between w-full">
 			<div>
@@ -78,6 +68,7 @@ function CardDetails({ item, setCartItems, cartItems }) {
 				className="absolute bottom-[-20px] left-14 text-center text-lg w-[200px] flex items-center justify-center gap-2 bg-blue-500 rounded-md py-1 font-base font-Poppins  group-hover:bg-blue-600 transition-colors"
 				onClick={() => {
 					if (cartItems.indexOf(item) !== -1) return
+					item.purchaseCount = 1
 					setCartItems([...cartItems, item]);
 					setActiveButton(true)
 				}}
