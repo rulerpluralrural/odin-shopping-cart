@@ -76,6 +76,7 @@ function CartBody({ cartItems, setCartItems }) {
 								setCartItems(
 									cartItems.slice(0, index).concat(cartItems.slice(index + 1))
 								);
+								localStorage.setItem("cartItems", JSON.stringify(cartItems.slice(0, index).concat(cartItems.slice(index + 1))))
 							}}
 						/>
 					</div>
@@ -86,15 +87,26 @@ function CartBody({ cartItems, setCartItems }) {
 }
 
 function CartFooter({ cartItems }) {
-
 	return (
 		<div className="p-5 border-t-[1px] border-slate-500 text-center font-Roboto">
 			<p className="font-bold text-lg">
-				Total Amount : <span className="text-green-400">${cartItems.reduce((accu, item) => {
-					return accu + item.prices * item.purchaseCount
-				}, 0).toFixed(2)}</span>
+				Total Amount :{" "}
+				<span className="text-green-400">
+					$
+					{cartItems
+						.reduce((accu, item) => {
+							return accu + item.prices * item.purchaseCount;
+						}, 0)
+						.toFixed(2)}
+				</span>
 			</p>
-			<button className="bg-blue-600 hover:bg-blue-700 focus:hover-blue-700 font-bold tracking-wider text-lg px-3 py-1 rounded-md w-full mt-2">
+			<button
+				className="bg-blue-600 hover:bg-blue-700 focus:hover-blue-700 font-bold tracking-wider text-lg px-3 py-1 rounded-md w-full mt-2"
+				onClick={() => {
+					if (cartItems.length === 0) return;
+					location.assign("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+				}}
+			>
 				Check Out
 			</button>
 		</div>
@@ -114,7 +126,6 @@ function CardImage({ item }) {
 }
 
 function CardDetails({ item, cartItems, setCartItems }) {
-
 	const num = item.prices * item.purchaseCount;
 
 	return (
@@ -135,6 +146,7 @@ function CardDetails({ item, cartItems, setCartItems }) {
 							if (item.purchaseCount >= 69) return;
 							item.purchaseCount += 1;
 							setCartItems([...cartItems]);
+							localStorage.setItem("cartItems", JSON.stringify([...cartItems]))
 						}}
 					/>
 					<p className="font-bold">{item.purchaseCount}</p>
@@ -145,6 +157,7 @@ function CardDetails({ item, cartItems, setCartItems }) {
 							if (item.purchaseCount <= 1) return;
 							item.purchaseCount -= 1;
 							setCartItems([...cartItems]);
+							localStorage.setItem("cartItems", JSON.stringify([...cartItems]))
 						}}
 					/>
 				</div>

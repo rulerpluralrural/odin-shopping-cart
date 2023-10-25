@@ -13,7 +13,9 @@ export default function App() {
 	const [error, setError] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const [toggleCart, setToggleCart] = useState(false);
-	const [cartItems, setCartItems] = useState([]);
+	const [cartItems, setCartItems] = useState(
+		JSON.parse(localStorage.getItem("cartItems")) || []
+	);
 
 	useEffect(() => {
 		if (!window) return;
@@ -37,6 +39,7 @@ export default function App() {
 					setLoading={setLoading}
 					toggleCart={toggleCart}
 					setToggleCart={setToggleCart}
+					cartItems={cartItems}
 				/>
 				<Routes>
 					<Route
@@ -76,7 +79,12 @@ export default function App() {
 				</Routes>
 				<Footer />
 			</BrowserRouter>
-			<Cart toggleCart={toggleCart} setToggleCart={setToggleCart} cartItems={cartItems} setCartItems={setCartItems}/>
+			<Cart
+				toggleCart={toggleCart}
+				setToggleCart={setToggleCart}
+				cartItems={cartItems}
+				setCartItems={setCartItems}
+			/>
 		</div>
 	);
 }

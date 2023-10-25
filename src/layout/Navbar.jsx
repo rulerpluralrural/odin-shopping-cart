@@ -4,14 +4,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
 	faBars,
 	faCartShopping,
-	faUser,
+	faCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
 const navHover =
 	"relative block after:block after:content-[''] after:absolute after:h-[1.8px] after:bg-zinc-200 after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-center cursor-pointer";
 
-export default function Navbar({ setRoute, route, setLoading, toggleCart, setToggleCart }) {
+export default function Navbar({ setRoute, route, setLoading, toggleCart, setToggleCart, cartItems }) {
 	return (
 		<>
 			<div
@@ -35,16 +35,16 @@ export default function Navbar({ setRoute, route, setLoading, toggleCart, setTog
 					>
 						Fake Shop
 					</Link>
-					<Nav setRoute={setRoute} setLoading={setLoading} route={route} toggleCart={toggleCart} setToggleCart={setToggleCart} />
+					<Nav setRoute={setRoute} setLoading={setLoading} route={route} toggleCart={toggleCart} setToggleCart={setToggleCart} cartItems={cartItems}/>
 				</div>
 			</div>
 		</>
 	);
 }
 
-function Nav({ setRoute, setLoading, route, toggleCart, setToggleCart }) {
+function Nav({ setRoute, setLoading, route, toggleCart, setToggleCart, cartItems }) {
 	return (
-		<nav>
+		<nav className="relative">
 			<ul className="flex items-center gap-10 text-[1.3rem] tracking-tighter text-zinc-100">
 				<li>
 					<FontAwesomeIcon icon={faBars} className="hidden" />
@@ -80,6 +80,7 @@ function Nav({ setRoute, setLoading, route, toggleCart, setToggleCart }) {
 						}}
 					/>
 				</li>
+				<p className={`absolute top-[-12px] right-[-13px] text-[1rem] font-bold font-Poppins text-red-500 ${cartItems.length === 0 ? "opacity-0" : "opacity-100"} transition-opacity`}>{cartItems.length}</p> 
 			</ul>
 		</nav>
 	);

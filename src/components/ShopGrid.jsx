@@ -70,6 +70,7 @@ function CardDetails({ item, setCartItems, cartItems }) {
 					if (cartItems.indexOf(item) !== -1) return
 					item.purchaseCount = 1
 					setCartItems([...cartItems, item]);
+					localStorage.setItem("cartItems", JSON.stringify([...cartItems, item]))
 					setActiveButton(true)
 				}}
 			>
