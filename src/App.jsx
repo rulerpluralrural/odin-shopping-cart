@@ -30,7 +30,7 @@ export default function App() {
 		<div
 			className={`flex flex-col h-screen justify-between ${
 				route === "home" ? "bg-[url('/images/cod.jpeg')]" : "bg-zinc-900 "
-			} transition-colors duration-300 ease-in bg-center bg-cover text-zinc-200 relative`}
+			} transition-colors duration-300 ease-in bg-center bg-cover bg-fixed text-zinc-200 relative`}
 		>
 			<BrowserRouter>
 				<Navbar

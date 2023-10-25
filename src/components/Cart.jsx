@@ -21,7 +21,7 @@ export default function Cart({
 					: "opacity-100 pointer-events-auto"
 			}`}
 		>
-			<div className="flex flex-col justify-between text-zinc-200 bg-slate-900 h-full w-[550px] rounded-sm overflow-hidden">
+			<div className="flex flex-col justify-between text-zinc-200 bg-slate-900 h-full sm:w-[550px] w-full rounded-sm overflow-hidden">
 				<CartHeader setToggleCart={setToggleCart} cartItems={cartItems} />
 				<CartBody cartItems={cartItems} setCartItems={setCartItems} />
 				<CartFooter cartItems={cartItems} />
@@ -119,7 +119,7 @@ function CardImage({ item }) {
 			<img
 				src={item.background_image}
 				alt={`${item.name} img`}
-				className="w-[250px] h-[150px] object-cover rounded-md"
+				className="w-[250px] h-[150px] object-cover rounded-md rounded-b-none"
 			/>
 		</div>
 	);
@@ -131,7 +131,7 @@ function CardDetails({ item, cartItems, setCartItems }) {
 	return (
 		<div className="text-left w-full flex flex-col justify-evenly text-lg p-2 pb-0">
 			<div>
-				<p className="text-yellow-300 font-bold text-xl">{item.name}</p>
+				<p className="text-yellow-300 font-bold sn:text-xl text-lg">{item.name}</p>
 				<p>${item.prices}</p>
 			</div>
 			<div className="flex justify-between items-center gap-2">

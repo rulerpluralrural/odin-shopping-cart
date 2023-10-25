@@ -2,9 +2,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-	faBars,
 	faCartShopping,
-	faCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
@@ -46,9 +44,6 @@ function Nav({ setRoute, setLoading, route, toggleCart, setToggleCart, cartItems
 	return (
 		<nav className="relative">
 			<ul className="flex items-center gap-10 text-[1.3rem] tracking-tighter text-zinc-100">
-				<li>
-					<FontAwesomeIcon icon={faBars} className="hidden" />
-				</li>
 				<li className={navHover}>
 					<Link
 						to={"/"}

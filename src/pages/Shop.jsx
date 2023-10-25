@@ -93,7 +93,7 @@ export default function Shop({ loading, setLoading, error, setError, setCartItem
 	} else {
 		return (
 			<div className="flex flex-col gap-6 self-center mt-28 overflow-scroll scroll-smooth px-8">
-				<div className="flex gap-2 items-center justify-center self-center w-full">
+				<div className="flex sm:gap-2 gap-4 items-center justify-center self-center w-full">
 					<SearchBox searchItems={searchItems} />
 					<Select setSortType={setSortType} />
 				</div>

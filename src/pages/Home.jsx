@@ -24,13 +24,13 @@ export default function Home({ loading, setLoading, setRoute, route }) {
 	return (
 		<div className="flex items-center flex-grow">
 			<div
-				className="w-[550px] h-[380px] flex flex-col items-start ml-20 font-Roboto bg-black bg-opacity-20 rounded-md p-2
+				className="md:w-[550px] lg:h-[380px] w-[400px] h-auto flex flex-col ml-20 font-Roboto bg-black bg-opacity-20 rounded-md p-2
 				"
 			>
-				<h1 className="text-center font-bold text-[2.9rem] text-green-200">
+				<h1 className="md:text-center text:left font-bold md:text-[2.9rem] text-[2.2rem] text-green-200">
 					Game On! Unleash Your Inner Gamer with Our Latest Deals!
 				</h1>
-				<p className="text-justify text-lg">
+				<p className="text-justify md:text-lg text-base">
 					Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sapiente
 					asperiores laudantium ratione ut facilis sed placeat magni dolores
 					recusandae mollitia.

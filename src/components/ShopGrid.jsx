@@ -5,7 +5,7 @@ import { faStar, faCartPlus } from "@fortawesome/free-solid-svg-icons";
 
 export default function ShopGrid({ results, setCartItems, cartItems }) {
 	return (
-		<div className="grid grid-cols-4 gap-5">
+		<div className="grid grid-cols-1 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 place-items-center w-full gap-5">
 			{results.map((item, index) => {
 				return (
 					<div
